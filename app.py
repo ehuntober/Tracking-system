@@ -14,9 +14,10 @@ class CustomerInquiry:
         
 def display_intro():
     print("Customer Support Ticketing System")
-    print("The Customer Support Ticketing System is a console-based application written in Python to organize and prioritize customer inquiries for efficient resolution.")
-    print("It allows support agents or customers to create, view, and manage support tickets, while providing automated workflows for handling routine tasks.")
-    time.sleep(2)
+    print("The Customer Support Ticketing System is a console-based application")
+    print("written in Python to organize and prioritize customer inquiries for efficient resolution.")
+    print("It allows support agents or customers to create, view, and manage support tickets, \n while providing automated workflows for handling routine tasks.")
+    time.sleep(1)
 
 def add_inquiry(inquiries):
     customer_name = input("Enter customer name: ")
@@ -99,6 +100,17 @@ def automated_workflow(inquiries):
             inquiry.assigned_to = "Jane Smith"
             update_ticket_history(inquiry, f"Auto-assigned to Jane Smith")
 
+def update_ticket_status(inquiries):
+    view_inquiries(inquiries)
+    inquiry_index = int(input("Enter the index of the ticket to update status: ")) - 1
+
+    if 0 <= inquiry_index < len(inquiries):
+        status = input("Enter the new status (Open/In-Progress/Resolved): ")
+        inquiries[inquiry_index].status = status
+        update_ticket_history(inquiries[inquiry_index], f"Status updated to {status}")
+        print("Ticket status updated.")
+    else:
+        print("Invalid inquiry index.")
 
 def save_data_to_file(inquiries, file_name):
     with open(file_name, 'w') as file:
@@ -130,32 +142,35 @@ def main():
         choice = input("Enter your choice (1/2/3/4/5/6/7/8/9): ")
 
         if choice == '1':
-            time.sleep(2)  # Introduce a 2-second delay before performing the task
+            time.sleep(1)  # Introduce a 2-second delay before performing the task
             add_inquiry(inquiries)
         elif choice == '2':
-            time.sleep(2)
+            time.sleep(1)
             view_inquiries(inquiries)
         elif choice == '3':
-            time.sleep(2)
+            time.sleep(1)
             sort_inquiries_by_priority(inquiries)
             print("Inquiries sorted by priority.")
         elif choice == '4':
-            time.sleep(2)
+            time.sleep(1)
             resolve_inquiry(inquiries)
         elif choice == '5':
-            time.sleep(2)
+            time.sleep(1)
             assign_ticket(inquiries)
         elif choice == '6':
-            time.sleep(2)
+            time.sleep(1)
             display_ticket_details(inquiries)
         elif choice == '7':
-            time.sleep(2)
+            time.sleep(1)
             update_ticket_status(inquiries)
         elif choice == '8':
-            time.sleep(2)
+            time.sleep(1)
             automated_workflow(inquiries)
             print("Automation tasks executed.")
         elif choice == '9':
+            print('exiting..')
+            time.sleep(1)
+            print('exiting...')
             time.sleep(2)
             save_data_to_file(inquiries, 'inquiries.json')
             break
@@ -165,3 +180,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

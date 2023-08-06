@@ -4,8 +4,9 @@
 The Customer Support Ticketing System is a console-based application written in Python to organize and prioritize customer inquiries for efficient resolution. It allows support agents or customers to create, view, and manage support tickets, while providing automated workflows for handling routine tasks.
 
 ### Features
-** Ticket Creation: **  Allows support agents or customers to create new support tickets for their inquiries or issues.
-View Inquiries: Provides a list of all customer inquiries, showing their details and current status.
+# Ticket Creation:   
+ - Allows support agents or customers to create new support tickets for their inquiries or issues.
+## View Inquiries: Provides a list of all customer inquiries, showing their details and current status.
 Sort Inquiries by Priority: Sorts the inquiries based on their priorities, from high to low.
 Resolve Inquiry: Marks a customer inquiry as "Resolved" once it has been successfully addressed.
 Assign Ticket: Assigns support agents or teams to specific tickets based on their expertise or workload.
