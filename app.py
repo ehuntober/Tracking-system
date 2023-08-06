@@ -1,10 +1,5 @@
-"""
-A console-based customer support ticketing system that organises and 
-prioritizes customer inquiries for efficient resolution.
-
-"""
-
 import json
+from datetime import datetime
 
 class CustomerInquiry:
     def __init__(self, customer_name, issue_description, priority, status="Open", assigned_to=None, history=None):
@@ -33,8 +28,15 @@ def view_inquiries(inquiries):
         for index, inquiry in enumerate(inquiries, 1):
             print(f"{index}. {inquiry.customer_name} - {inquiry.priority} priority: {inquiry.issue_description}")
 
+# def sort_inquiries_by_priority(inquiries):
+#     inquiries.sort(key=lambda x: x.priority, reverse=True)
 def sort_inquiries_by_priority(inquiries):
-    inquiries.sort(key=lambda x: x.priority, reverse=True)
+    priority_order = {"low": 1, "medium": 2, "high": 3}
+    inquiries.sort(key=lambda x: priority_order[x.priority.lower()], reverse=True)
+    view_inquiries(inquiries)
+
+
+
 
 def resolve_inquiry(inquiries):
     view_inquiries(inquiries)
@@ -77,8 +79,9 @@ def display_ticket_details(inquiries):
         print("Invalid inquiry index.")
 
 def update_ticket_history(inquiry, action):
-    event = f"{action.capitalize()} by {inquiry.assigned_to if inquiry.assigned_to else 'Customer'}"
+    event = f"{action.capitalize()}, {datetime.now().isoformat()} by {inquiry.assigned_to if inquiry.assigned_to else 'Customer'}"
     inquiry.history.append(event)
+
 
 def save_data_to_file(inquiries, file_name):
     with open(file_name, 'w') as file:
