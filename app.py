@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import time
 
 class CustomerInquiry:
     def __init__(self, customer_name, issue_description, priority, status="Open", assigned_to=None, history=None):
@@ -9,6 +10,13 @@ class CustomerInquiry:
         self.status = status
         self.assigned_to = assigned_to
         self.history = history if history is not None else []
+        
+        
+def display_intro():
+    print("Customer Support Ticketing System")
+    print("The Customer Support Ticketing System is a console-based application written in Python to organize and prioritize customer inquiries for efficient resolution.")
+    print("It allows support agents or customers to create, view, and manage support tickets, while providing automated workflows for handling routine tasks.")
+    time.sleep(2)
 
 def add_inquiry(inquiries):
     customer_name = input("Enter customer name: ")
@@ -106,6 +114,7 @@ def load_data_from_file(file_name):
     except FileNotFoundError:
         return []
 def main():
+    display_intro()
     inquiries = load_data_from_file('inquiries.json')
     while True:
         print("\n1. Create new ticket")
@@ -115,33 +124,43 @@ def main():
         print("5. Assign ticket")
         print("6. View ticket details")
         print("7. Update ticket status")
-        print("8. Automation and Workflows")  # Added new option
+        print("8. Automation and Workflows")
         print("9. Exit")
 
         choice = input("Enter your choice (1/2/3/4/5/6/7/8/9): ")
 
         if choice == '1':
+            time.sleep(2)  # Introduce a 2-second delay before performing the task
             add_inquiry(inquiries)
         elif choice == '2':
+            time.sleep(2)
             view_inquiries(inquiries)
         elif choice == '3':
+            time.sleep(2)
             sort_inquiries_by_priority(inquiries)
             print("Inquiries sorted by priority.")
         elif choice == '4':
+            time.sleep(2)
             resolve_inquiry(inquiries)
         elif choice == '5':
+            time.sleep(2)
             assign_ticket(inquiries)
         elif choice == '6':
+            time.sleep(2)
             display_ticket_details(inquiries)
         elif choice == '7':
+            time.sleep(2)
             update_ticket_status(inquiries)
-        elif choice == '8':  # New option for Automation and Workflows
+        elif choice == '8':
+            time.sleep(2)
             automated_workflow(inquiries)
             print("Automation tasks executed.")
         elif choice == '9':
+            time.sleep(2)
             save_data_to_file(inquiries, 'inquiries.json')
             break
         else:
+            time.sleep(2)
             print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
