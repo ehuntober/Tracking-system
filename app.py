@@ -81,6 +81,15 @@ def display_ticket_details(inquiries):
 def update_ticket_history(inquiry, action):
     event = f"{action.capitalize()}, {datetime.now().isoformat()} by {inquiry.assigned_to if inquiry.assigned_to else 'Customer'}"
     inquiry.history.append(event)
+    
+def automated_workflow(inquiries):
+    for inquiry in inquiries:
+        if inquiry.priority.lower() == "high" and not inquiry.assigned_to:
+            inquiry.assigned_to = "John Doe"
+            update_ticket_history(inquiry, f"Auto-assigned to John Doe")
+        elif inquiry.priority.lower() == "medium" and not inquiry.assigned_to:
+            inquiry.assigned_to = "Jane Smith"
+            update_ticket_history(inquiry, f"Auto-assigned to Jane Smith")
 
 
 def save_data_to_file(inquiries, file_name):
@@ -96,7 +105,6 @@ def load_data_from_file(file_name):
             return inquiries
     except FileNotFoundError:
         return []
-
 def main():
     inquiries = load_data_from_file('inquiries.json')
     while True:
@@ -106,9 +114,11 @@ def main():
         print("4. Resolve inquiry")
         print("5. Assign ticket")
         print("6. View ticket details")
-        print("7. Exit")
+        print("7. Update ticket status")
+        print("8. Automation and Workflows")  # Added new option
+        print("9. Exit")
 
-        choice = input("Enter your choice (1/2/3/4/5/6/7): ")
+        choice = input("Enter your choice (1/2/3/4/5/6/7/8/9): ")
 
         if choice == '1':
             add_inquiry(inquiries)
@@ -124,6 +134,11 @@ def main():
         elif choice == '6':
             display_ticket_details(inquiries)
         elif choice == '7':
+            update_ticket_status(inquiries)
+        elif choice == '8':  # New option for Automation and Workflows
+            automated_workflow(inquiries)
+            print("Automation tasks executed.")
+        elif choice == '9':
             save_data_to_file(inquiries, 'inquiries.json')
             break
         else:
